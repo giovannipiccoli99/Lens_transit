@@ -31,10 +31,51 @@ dxy = hx*hy * dhh + hx * diff(hy,h) * dh + \
 tr = simplify(dxx+dyy) # Trace
 dethess = simplify(dxx*dyy-dxy*dxy) # Hessian determinant
 
-
-print(tr)
 print(dethess)
 
+
+'''
+Ahh = dhh + dh/(R+h)
+Aff = dff/(R+h)**2
+
+numer = (R+h)**4 * dethess
+
+print(numer)
+
+ans = collect(numer,df).coeff(df,2)
+Fdf2 = simplify(factor(ans))
+print('[df^2] ',Fdf2)
+numer = simplify(numer - Fdf2 * df**2)
+print(numer)
+
+ans = collect(numer,dff).coeff(dff,1)
+Fdff = simplify(factor(ans))
+print('[dff] ',Fdff)
+numer = simplify(numer - Fdff * dff)
+print(numer)
+
+ans = collect(numer,dhh).coeff(dhh,1)
+Fdhh = simplify(factor(ans))
+print('[dhh] ', Fdhh)
+numer = simplify(numer - Fdhh * dhh)
+print(numer)
+
+ans = collect(dethess*(R+h)**4,dhf).coeff(dhf,2)
+Fdhf2 = simplify(factor(ans))
+print('[dhf^2] ',Fdhf2)
+
+numer = simplify(numer - Fdhf2 * dhf**2)
+print(numer)
+
+rec = dhh*dh * (R+h)**3 + (dff*dhh-dhf**2)*(R+h)**2 + 2*df*dhf * (R+h) - df*df
+'''
+
+rec = dhh*dh/(R+h) + (dff*dhh-dhf**2)/(R+h)**2 + 2*df*dhf/(R+h)**3 - df*df/(R+h)**4
+
+ans = simplify(dethess - rec)
+print(ans)
+
+pprint(rec)
 
 
 
