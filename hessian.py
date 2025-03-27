@@ -31,6 +31,7 @@ dxy = hx*hy * dhh + hx * diff(hy,h) * dh + \
 tr = simplify(dxx+dyy) # Trace
 dethess = simplify(dxx*dyy-dxy*dxy) # Hessian determinant
 
+print(tr)
 print(dethess)
 
 
@@ -77,6 +78,29 @@ print(ans)
 
 pprint(rec)
 
+Qrr = dhh
+Qff = dh/(R+h) + dff/(R+h)**2
+Qrf = dhf/(R+h) - df/(R+h)**2
 
+ans = Qff*Qrr - Qrf*Qrf
+ans = simplify(rec-ans)
+pprint(ans)
 
+'''
 
+In coordinates
+
+   x = (R + h) cos(f)
+   y = (R + h) sin(f)
+
+with R being constant.
+
+the inverse magnification matrix is
+
+     t_hh                               t_hf/(R+h) - t_f/(R+h)^2
+
+     t_hf/(R+h) - t_f/(R+h)^2           t_h/(R+h) + t_ff/(R+h)^2
+
+where subscripts denote derivaties with respect to h or f.
+
+'''
