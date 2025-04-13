@@ -33,8 +33,7 @@ wye = np.array([0,1,0]).T
 
 lon = np.linspace(0,2*np.pi,50)
 
-az = 0.5
-for ay in np.linspace(0,2*np.pi,256):
+def frame(ay,az):
     pl.clf()
     for lat in np.linspace(-np.pi/2,np.pi/2,12):
         p = np.array([rotZ(az) @ rotY(ay) @ rotZ(l) @ rotX(lat) @ wye for l in lon])
@@ -45,3 +44,11 @@ for ay in np.linspace(0,2*np.pi,256):
         pl.plot(p[:,1],p[:,2],color=col)
     pl.gca().set_aspect(1)
     pl.pause(.01)
+    
+az = 0.5
+for ay in np.linspace(0,2*np.pi,256):
+    frame(ay,az)
+    
+ay = 0.5
+for az in np.linspace(0,2*np.pi,256):
+    frame(ay,az)
