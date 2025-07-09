@@ -43,7 +43,7 @@ def frame(ay,az):
             col = 'cyan'
         pl.plot(p[:,1],p[:,2],color=col)
     pl.gca().set_aspect(1)
-    pl.pause(.01)
+    pl.pause(.1)
     
 az = 0.5
 for ay in np.linspace(0,2*np.pi,256):
